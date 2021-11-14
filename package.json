@@ -1,0 +1,36 @@
+{
+  "name": "@jodaz_/data-provider",
+  "version": "1.0.0",
+  "description": "A laravel/objectionjs focused json api dataprovider for react-admin",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "private": false,
+  "repository": "https://github.com/jodaz/data-provider.git",
+  "author": "Jesus Ordosgoitty <jesuodz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jodaz/data-provider/issues"
+  },
+  "homepage": "https://github.com/jodaz/data-provider",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "laravel",
+    "react-admin",
+    "react",
+    "objectionjs"
+  ],
+  "devDependencies": {
+    "@types/is-empty": "^1.2.1",
+    "@types/qs": "^6.9.7",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

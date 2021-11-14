@@ -1,0 +1,4 @@
+node_modules/
+lib/
+*.sw*
+package-lock.json
