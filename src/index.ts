@@ -91,7 +91,14 @@ const dataProvider = (apiURL: string, customSettings = {}, tokenName = 'token') 
                 data: { ...res.data }
             }
         },
-        updateMany: (_resource: string, _params: any) => Promise,
+        updateMany: async (resource: string, params: any) => {
+            const query = getIds(params, settings.arrayFormat);
+            url = `${apiURL}/${resource}/${query}`;
+
+            const res = await client.get(url)
+
+            return { data: { ...res.data } }
+        },
         delete: async (resource: string, params: any) => {
             url = `${apiURL}/${resource}/${params.id}`;
 
@@ -106,20 +113,6 @@ const dataProvider = (apiURL: string, customSettings = {}, tokenName = 'token') 
             const res = await client.delete(url);
 
             return { data: { ...res.data } }
-        },
-        get: async (endpoint: string) => {
-            url = `${apiURL}/${endpoint}`;
-
-            const res = await client.get(url);
-
-            return res.data;
-        },
-        post: async (endpoint: string, data: any) => {
-            url = `${apiURL}/${endpoint}`;
-
-            const res = await client.post(url, data);
-
-            return res.data;
         }
     });
 }
