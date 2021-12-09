@@ -1,6 +1,6 @@
 {
   "name": "@jodaz_/data-provider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A laravel/objectionjs focused json api dataprovider for react-admin",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
