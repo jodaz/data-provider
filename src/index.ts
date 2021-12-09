@@ -7,7 +7,7 @@ import {
 } from './helpers';
 import interceptors from './interceptors';
 
-const dataProvider = (apiURL: string, customSettings = {}, tokenName = 'token') => {
+export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
     let url = '';
     const settings = {...customSettings, ...defaultSettings};
     const options = {
@@ -21,7 +21,7 @@ const dataProvider = (apiURL: string, customSettings = {}, tokenName = 'token') 
 
     interceptors(client, tokenName);
 
-    return ({
+    const endpoints = {
         getList: async (resource: string, params: any) => {
             const query = getQueryFromParams({ ...params, ...customSettings });
 
@@ -114,7 +114,9 @@ const dataProvider = (apiURL: string, customSettings = {}, tokenName = 'token') 
 
             return { data: { ...res.data } }
         }
+    };
+
+    return ({
+        client, endpoints
     });
 }
-
-export default dataProvider;
