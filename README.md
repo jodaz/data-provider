@@ -1,6 +1,6 @@
-# ra-laravel-client
+# data-provider
 
-A laravel-focused JSONAPI dataprovider for [react-admin](https://github.com/marmelab/react-admin). This package is still in development. Currently only supports:
+A laravel/objectionjs-focused JSONAPI dataprovider for [react-admin](https://github.com/marmelab/react-admin). Currently supports all dataproviders methods:
 
 - `getList`
 - `getMany`
@@ -9,24 +9,28 @@ A laravel-focused JSONAPI dataprovider for [react-admin](https://github.com/marm
 - `create`
 - `update`
 - `delete`
-- `get`: Custom wrapper for axios.get() method
-- `post`: Custom wrapper for axios.post() method
+
+This packages also exposes an axios client for custom endpoints.
 
 ## Usage
 
-1. Install the package `npm i -D ra-laravel-client`.
-2. Import and set the base url, and pass it as the dataprovider for react-admin.
+1. Install the package `npm i -D @jodaz_/data-provider`.
+2. Import and set the base url, retrieve the endpoint object and pass it as the dataprovider for react-admin.
+
 
 ``` javascript
 //in app.js
 import React from "react";
 import { Admin, Resource } from "react-admin";
-import apiClient from "ra-laravel-client";
+import dataProvider from '@jodaz_/data-provider';
 
-const dataProvider = apiClient('http://dev.project.loc/api');
+const { endpoints, client } = dataProvider('http://your.api.endpoint', {
+  offsetPageNum: -1,
+  // Other axios configs
+}, 'Your token name used in localstorage');
 
 const App = () => (
-  <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+  <Admin dashboard={Dashboard} dataProvider={endpoints}>
     ...
   </Admin>
 );
@@ -36,12 +40,15 @@ export default App;
 
 ## API
 ```
-  apiClient(api, customConfigs, tokenName);
+  dataProvider(api, customConfigs, tokenName);
 ```
 
 - `api`: a valid API route **REQUIRED**.
 - `customConfigs`: an object of custom axios configs.
 - `tokenName`: a valid token name used when retrieving a Bearer token from localStorage.
+
+- `endpoints`: exports all the required resources for react-admin.
+- `client`: exports an axios client for custom api endpoint calls.
 
 ## Other custom configs
 

@@ -39,7 +39,7 @@ export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
 
             const res = await client.get(url);
 
-            return { data: { ...res.data  } }
+            return res;
         },
         getMany: async (resource: string, params: any) => {
             const query = getIds(params);
@@ -69,13 +69,8 @@ export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
             url = `${apiURL}/${resource}`;
 
             const res = await client.post(url, params.data);
-            const { id, attributes  } = res.data;
 
-            return {
-                data: {
-                    id, ...attributes,
-                },
-            };
+            return res;
         },
         update: async (resource: string, params: any) => {
             url = `${apiURL}/${resource}/${params.id}`;
@@ -87,9 +82,7 @@ export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
 
             const res = await client.put(url, data);
 
-            return {
-                data: { ...res.data }
-            }
+            return res
         },
         updateMany: async (resource: string, params: any) => {
             const query = getIds(params, settings.arrayFormat);
@@ -97,14 +90,14 @@ export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
 
             const res = await client.get(url)
 
-            return { data: { ...res.data } }
+            return res
         },
         delete: async (resource: string, params: any) => {
             url = `${apiURL}/${resource}/${params.id}`;
 
             const res = await client.delete(url);
 
-            return { data: { ...res.data } }
+            return res
         },
         deleteMany: async (resource: string, params: any) => {
             const query = getIds(params, settings.arrayFormat);
@@ -112,7 +105,7 @@ export default (apiURL: string, customSettings = {}, tokenName = 'token') => {
 
             const res = await client.delete(url);
 
-            return { data: { ...res.data } }
+            return res
         }
     };
 
